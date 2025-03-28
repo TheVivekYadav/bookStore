@@ -23,7 +23,7 @@ This is a simple Book Library web app that fetches books from [FreeAPI.app](http
 ![Mobile Version](./img/ss2.png)
 
 ## Deployment 🌐
-[Click here to use the Mood Tracker](https://book-store-ten-theta.vercel.app/)
+[Click here](https://book-store-ten-theta.vercel.app/)
 
 ## Setup & Usage
 1. Clone the repo
