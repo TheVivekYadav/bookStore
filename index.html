@@ -58,18 +58,21 @@
 					</span>
 				</button>
 			</div>
-			<div id="bookContainer" class="grid"></div>
 		</div>
-		<script>
-			const API_URL = "https://api.freeapi.app/api/v1/public/books"
-			let books = []
-			let page = 1;
-			let view = "grid";
-			const bookContainer = document.getElementById("bookContainer");
-			const toggleViewBtn = document.getElementById("toggleView");
+		<div id="bookContainer" class="grid"></div>
+		<div id="pagination"></div>
+	</div>
+	<script>
+		const API_URL = "https://api.freeapi.app/api/v1/public/books"
+		let books = []
+		let page = 1;
+		let totalPages = 3;
+		let view = "grid";
+		const bookContainer = document.getElementById("bookContainer");
+		const toggleViewBtn = document.getElementById("toggleView");
 
-		</script>
-		<script src="script.js"></script>
+	</script>
+	<script src="script.js"></script>
 </body>
 
 </html>

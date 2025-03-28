@@ -1,20 +1,20 @@
 
 // this function will fetch books
 
-async function fetchBooks() {
+async function fetchBooks(page = 1) {
     console.log('fetching');
-
+    console.log(page);
     try {
-        const response = await fetch(`${API_URL}?page=1&limit=10&inc=kind%2Cid%2Cetag%2CvolumeInfo&query=tech`, {
+        const response = await fetch(`${API_URL}?page=${page}&limit=7&inc=kind%2Cid%2Cetag%2CvolumeInfo&query=tech`, {
             method: 'GET',
             headers: { accept: 'application/json' }
         });
-
+console.log(`${API_URL}?page=${page}&limit=100&inc=kind%2Cid%2Cetag%2CvolumeInfo&query=tech`);
         const data = await response.json();
-        console.log(data);
 
 
         books = page === 1 ? data.data.data : [...books, ...data.data.data];
+        console.log(books);
         renderBooks();
     } catch (error) {
         console.error("Error fetching books:", error);
@@ -25,6 +25,7 @@ async function fetchBooks() {
 
 // rendring books
 function renderBooks(){
+    console.log("rendering");
     bookContainer.className = view;
     bookContainer.innerHTML = "";
 	books.forEach((book, index) => {
@@ -55,7 +56,6 @@ function renderBooks(){
             </div>
         `;
 
-
 		// Add click event to open book details
         bookElement.addEventListener("click", () => {
             if (book.volumeInfo?.infoLink) {
@@ -64,6 +64,8 @@ function renderBooks(){
         });
         
         bookContainer.appendChild(bookElement);
+
+    renderPagination();
 
 	})
 }
@@ -85,6 +87,26 @@ function formatDate(dateString) {
         }).format(date);
     } catch (e) {
         return dateString;
+    }
+}
+
+
+function renderPagination() {
+    const paginationContainer = document.getElementById("pagination");
+    paginationContainer.innerHTML = ""; // Clear previous buttons
+
+    for (let i = 1; i <= totalPages; i++) {
+        const button = document.createElement("button");
+        button.textContent = i;
+        button.classList.add("page-button");
+        if (i === page) button.classList.add("active");
+
+        button.addEventListener("click", () => {
+            page = i;
+            fetchBooks(i);
+        });
+
+        paginationContainer.appendChild(button);
     }
 }
 
