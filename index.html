@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Book Explorer</title>
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+</head>
+
+<body>
+	<header>
+		<h1>Book Store</h1>
+	</header>
+	<div class="container">
+		<div id="bookContainer" class="grid"></div>
+	</div>
+	<script>
+		const API_URL = "https://api.freeapi.app/api/v1/public/books"
+		let books = []
+		let page = 1;
+		let view = "grid";
+		const bookContainer = document.getElementById("bookContainer");
+
+	</script>
+	<script src="script.js"></script>
+</body>
+
+</html>
