@@ -88,6 +88,11 @@ function formatDate(dateString) {
     }
 }
 
+toggleViewBtn.addEventListener("click", () => {
+    view = view === "grid" ? "list" : "grid";
+    bookContainer.className = view;
+});
+
 // Initialize the app
 document.addEventListener("DOMContentLoaded", () => {
     fetchBooks();
