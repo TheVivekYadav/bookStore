@@ -26,10 +26,29 @@ console.log(`${API_URL}?page=${page}&limit=100&inc=kind%2Cid%2Cetag%2CvolumeInfo
 // rendring books
 function renderBooks(){
     console.log("rendering");
+
+
+    const sortBy = sortSelect.value;
+    books.sort((a, b) => {
+        if (sortBy === "title") {
+            // Compare book titles alphabetically, handling missing titles
+            return (a.volumeInfo?.title || "").localeCompare(b.volumeInfo?.title || "");
+        } else {
+            // Handle missing dates by placing them at the end
+            if (!a.volumeInfo?.publishedDate) return 1;
+            if (!b.volumeInfo?.publishedDate) return -1;
+            // Sort books by published date in descending order (newest first)
+            return new Date(b.volumeInfo.publishedDate) - new Date(a.volumeInfo.publishedDate);
+        }
+    });
+
     bookContainer.className = view;
     bookContainer.innerHTML = "";
 	books.forEach((book, index) => {
-		const bookElement = document.createElement("div");
+
+            if (index < (page - 1) * 7) return;//skipping already rendered books
+	
+        const bookElement = document.createElement("div");
 		bookElement.className = "book";
 
 		const imageUrl = book.volumeInfo?.imageLinks?.thumbnail;
@@ -113,6 +132,11 @@ function renderPagination() {
 toggleViewBtn.addEventListener("click", () => {
     view = view === "grid" ? "list" : "grid";
     bookContainer.className = view;
+});
+
+//re rendring the books if select value changes
+sortSelect.addEventListener("change", () => {
+    renderBooks();
 });
 
 // Initialize the app
